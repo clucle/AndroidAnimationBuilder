@@ -1,5 +1,7 @@
 package shakesplash.com.shake;
 
+import android.content.Context;
+import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnShake;
     private ConstraintLayout customLayout;
 
+    private boolean m_isVibrator = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +33,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 customLayout.startAnimation(shake);
+                vibrator();
             }
         });
+    }
+
+    private void changeVibrator(){
+        if(m_isVibrator) {
+            m_isVibrator = false;
+        } else {
+            m_isVibrator = true;
+        }
+    }
+
+    private void vibrator(){
+        if(m_isVibrator){
+            Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            long[] pattern = {1000, 200, 1000, 2000, 1200};
+            vibe.vibrate(pattern, 0);
+            vibe.vibrate(1000);
+        }
     }
 
 }

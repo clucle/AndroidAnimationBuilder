@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private Animation shake;
 
     private Button btnShake;
     private ConstraintLayout customLayout;
@@ -26,24 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         customLayout = (ConstraintLayout) findViewById(R.id.shake_layout);
 
-        shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-
         btnShake = (Button) findViewById(R.id.btn_shake);
         btnShake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customLayout.startAnimation(shake);
-                vibrator();
+                Shake doShake = new Shake(getApplicationContext());
+                doShake.shakeView(customLayout);
+                doShake.shakeView(btnShake);
+                //customLayout.startAnimation(shake);
+                //vibrator();
             }
         });
-    }
-
-    private void changeVibrator(){
-        if(m_isVibrator) {
-            m_isVibrator = false;
-        } else {
-            m_isVibrator = true;
-        }
     }
 
     private void vibrator(){

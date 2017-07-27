@@ -24,11 +24,13 @@ public class Rotate {
 
         // 선택 인자 (기본 값)
         private int duration = 100;
-        private int fromDegrees = -5;
+
         private int pivotX = 30;
         private int pivotY = 30;
         private int repeatCount = 5;
         private String repeatMode = "reverse";
+
+        private int fromDegrees = -5;
         private int toDegrees = 5;
 
         public Builder(Context context) {
@@ -36,13 +38,24 @@ public class Rotate {
             rotate = AnimationUtils.loadAnimation(context, R.anim.rotate);
         }
 
-        public Builder duration(int val) {
-            duration = val;
-            return this;
+        public <T extends View> void animView(T view) {
+
+            rotate.setDuration(duration);
+            switch (repeatMode) {
+                case "reverse":
+                    rotate.setRepeatCount(repeatCount);
+                    break;
+            }
+            rotate.setRepeatMode(Animation.REVERSE);
+
+            view.setPivotX(pivotX);
+            view.setPivotY(pivotY);
+
+            view.startAnimation(rotate);
         }
 
-        public Builder fromDegrees(int val) {
-            fromDegrees = val;
+        public Builder duration(int val) {
+            duration = val;
             return this;
         }
 
@@ -66,13 +79,14 @@ public class Rotate {
             return this;
         }
 
-        public Builder toDegrees(int val) {
-            toDegrees = val;
+        public Builder fromDegrees(int val) {
+            fromDegrees = val;
             return this;
         }
 
-        public <T extends View> void animView(T view) {
-            view.startAnimation(rotate);
+        public Builder toDegrees(int val) {
+            toDegrees = val;
+            return this;
         }
 
         public Rotate build() {

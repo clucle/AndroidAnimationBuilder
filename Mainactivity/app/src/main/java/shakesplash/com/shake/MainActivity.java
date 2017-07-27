@@ -1,13 +1,8 @@
 package shakesplash.com.shake;
 
-import android.os.Debug;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new Rotate
                         .Builder(getApplicationContext())
+                        .duration(200)
+                        .pivotX(100)
+                        .pivotY(100)
+                        .repeatCount(20)
+                        .repeatMode("reverse")
                         .animView(findViewById(R.id.rotate_layout));
             }
         });

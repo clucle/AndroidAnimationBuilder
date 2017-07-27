@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("shakesplash.com.shake", appContext.getPackageName());
+        assertEquals("shakesplash.com.rotate", appContext.getPackageName());
     }
 }

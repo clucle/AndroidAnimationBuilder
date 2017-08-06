@@ -1,10 +1,8 @@
-package shakesplash.com.shake;
+package com.github.clucle;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 
 public class Rotate {
@@ -21,6 +19,10 @@ public class Rotate {
     private final String repeatMode;
     private final int toDegrees;
 
+    public static enum TYPE {
+        REVERSE
+    }
+
     public static class Builder {
         // 필수 인자
         private Context context;
@@ -34,7 +36,7 @@ public class Rotate {
         private float pivotY = 0;
 
         private int repeatCount = 5;
-        private String repeatMode = "reverse";
+        private TYPE repeatMode = TYPE.REVERSE;
 
         private int fromDegrees = -5;
         private int toDegrees = 5;
@@ -51,7 +53,7 @@ public class Rotate {
             rotate.setDuration(duration);
             rotate.setRepeatCount(repeatCount);
             switch (repeatMode) {
-                case "reverse":
+                case REVERSE:
                     rotate.setRepeatMode(Animation.REVERSE);
                     break;
             }
@@ -81,7 +83,7 @@ public class Rotate {
             return this;
         }
 
-        public Builder repeatMode(String val) {
+        public Builder repeatMode(TYPE val) {
             repeatMode = val;
             return this;
         }

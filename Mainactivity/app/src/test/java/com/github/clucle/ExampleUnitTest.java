@@ -1,4 +1,4 @@
-package shakesplash.com.shake;
+package com.github.clucle;
 
 import org.junit.Test;
 

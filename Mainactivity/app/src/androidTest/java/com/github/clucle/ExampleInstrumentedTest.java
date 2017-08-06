@@ -1,4 +1,4 @@
-package shakesplash.com.shake;
+package com.github.clucle;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

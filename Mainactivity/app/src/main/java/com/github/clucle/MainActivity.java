@@ -1,4 +1,4 @@
-package shakesplash.com.shake;
+package com.github.clucle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                         .repeatCount(1)
                         .pivotX(findViewById(R.id.btn_rotate).getWidth() / 2)
                         .pivotY(findViewById(R.id.btn_rotate).getHeight() / 2)
-                        .repeatMode("reverse")
+                        .repeatMode(Rotate.TYPE.REVERSE)
                         .animView(findViewById(R.id.btn_rotate));
             }
         });

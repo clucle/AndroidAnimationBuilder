@@ -1,6 +1,7 @@
 package shakesplash.com.shake;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,8 +12,10 @@ public class Rotate {
 
     private final int duration;
     private final int fromDegrees;
-    private final int pivotX;
-    private final int pivotY;
+
+    private final boolean changePivot;
+    private final float pivotX;
+    private final float pivotY;
     private final int repeatCount;
     private final String repeatMode;
     private final int toDegrees;
@@ -25,8 +28,10 @@ public class Rotate {
         // 선택 인자 (기본 값)
         private int duration = 100;
 
-        private int pivotX = 30;
-        private int pivotY = 30;
+        private boolean changePivot = false;
+        private float pivotX = 0;
+        private float pivotY = 0;
+
         private int repeatCount = 5;
         private String repeatMode = "reverse";
 
@@ -43,13 +48,21 @@ public class Rotate {
             rotate.setDuration(duration);
             switch (repeatMode) {
                 case "reverse":
-                    rotate.setRepeatCount(repeatCount);
+                    rotate.setRepeatMode(Animation.REVERSE);
                     break;
             }
-            rotate.setRepeatMode(Animation.REVERSE);
+            rotate.setRepeatCount(repeatCount);
 
-            view.setPivotX(pivotX);
-            view.setPivotY(pivotY);
+            Log.d("[PIVOTX]", Float.toString(view.getPivotX()));
+            Log.d("[PIVOTY]", Float.toString(view.getPivotY()));
+
+            if (changePivot) {
+                view.setPivotX(pivotX);
+                view.setPivotY(pivotY);
+            } else {
+                view.setPivotX(0.5f);
+                view.setPivotY(0.5f);
+            }
 
             view.startAnimation(rotate);
         }
@@ -59,12 +72,14 @@ public class Rotate {
             return this;
         }
 
-        public Builder pivotX(int val) {
+        public Builder pivotX(float val) {
+            changePivot = true;
             pivotX = val;
             return this;
         }
 
-        public Builder pivotY(int val) {
+        public Builder pivotY(float val) {
+            changePivot = true;
             pivotY = val;
             return this;
         }
@@ -100,6 +115,8 @@ public class Rotate {
 
         duration = builder.duration;
         fromDegrees = builder.fromDegrees;
+
+        changePivot = builder.changePivot;
         pivotX = builder.pivotX;
         pivotY = builder.pivotY;
         repeatCount = builder.repeatCount;

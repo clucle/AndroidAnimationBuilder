@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 
 public class Rotate {
     private final Animation rotate;
@@ -23,7 +24,7 @@ public class Rotate {
     public static class Builder {
         // 필수 인자
         private Context context;
-        private Animation rotate;
+        private RotateAnimation rotate;
 
         // 선택 인자 (기본 값)
         private int duration = 100;
@@ -40,28 +41,19 @@ public class Rotate {
 
         public Builder(Context context) {
             this.context = context;
-            rotate = AnimationUtils.loadAnimation(context, R.anim.rotate);
+
         }
 
         public <T extends View> void animView(T view) {
 
+            //rotate = AnimationUtils.loadAnimation(context, R.anim.rotate);
+            rotate = new RotateAnimation(fromDegrees, toDegrees, pivotX, pivotY);
             rotate.setDuration(duration);
+            rotate.setRepeatCount(repeatCount);
             switch (repeatMode) {
                 case "reverse":
                     rotate.setRepeatMode(Animation.REVERSE);
                     break;
-            }
-            rotate.setRepeatCount(repeatCount);
-
-            Log.d("[PIVOTX]", Float.toString(view.getPivotX()));
-            Log.d("[PIVOTY]", Float.toString(view.getPivotY()));
-
-            if (changePivot) {
-                view.setPivotX(pivotX);
-                view.setPivotY(pivotY);
-            } else {
-                view.setPivotX(0.5f);
-                view.setPivotY(0.5f);
             }
 
             view.startAnimation(rotate);

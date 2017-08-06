@@ -19,8 +19,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new Rotate
                         .Builder(getApplicationContext())
-                        .duration(100)
-                        .repeatCount(5)
+                        .fromDegrees(0)
+                        .toDegrees(360)
+                        .duration(1000)
+                        .repeatCount(1)
+                        .pivotX(findViewById(R.id.btn_rotate).getWidth() / 2)
+                        .pivotY(findViewById(R.id.btn_rotate).getHeight() / 2)
                         .repeatMode("reverse")
                         .animView(findViewById(R.id.btn_rotate));
             }

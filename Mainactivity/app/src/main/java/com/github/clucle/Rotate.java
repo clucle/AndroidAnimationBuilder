@@ -59,18 +59,39 @@ public class Rotate {
             rotate.setDuration(duration);
             rotate.setRepeatCount(repeatCount);
             switch (repeatMode) {
-                case ABSOLUTE: rotate.setRepeatMode(Animation.ABSOLUTE); break;
-                case INFINITE: rotate.setRepeatCount(Animation.INFINITE); break;
-                case RELATIVE_TO_PARENT: rotate.setRepeatMode(Animation.RELATIVE_TO_PARENT); break;
-                case RELATIVE_TO_SELF: rotate.setRepeatMode(Animation.RELATIVE_TO_SELF); break;
-                case RESTART: rotate.setRepeatMode(Animation.RESTART); break;
-                case REVERSE: rotate.setRepeatMode(Animation.REVERSE); break;
-                case START_ON_FIRST_FRAME: rotate.setRepeatMode(Animation.START_ON_FIRST_FRAME); break;
-                case ZORDER_BOTTOM: rotate.setRepeatMode(Animation.ZORDER_BOTTOM); break;
-                case ZORDER_NORMAL: rotate.setRepeatMode(Animation.ZORDER_NORMAL); break;
-                case ZORDER_TOP: rotate.setRepeatMode(Animation.ZORDER_TOP); break;
+                case ABSOLUTE:
+                    rotate.setRepeatMode(Animation.ABSOLUTE);
+                    break;
+                case INFINITE:
+                    rotate.setRepeatCount(Animation.INFINITE);
+                    break;
+                case RELATIVE_TO_PARENT:
+                    rotate.setRepeatMode(Animation.RELATIVE_TO_PARENT);
+                    break;
+                case RELATIVE_TO_SELF:
+                    rotate.setRepeatMode(Animation.RELATIVE_TO_SELF);
+                    break;
+                case RESTART:
+                    rotate.setRepeatMode(Animation.RESTART);
+                    break;
+                case REVERSE:
+                    rotate.setRepeatMode(Animation.REVERSE);
+                    break;
+                case START_ON_FIRST_FRAME:
+                    rotate.setRepeatMode(Animation.START_ON_FIRST_FRAME);
+                    break;
+                case ZORDER_BOTTOM:
+                    rotate.setRepeatMode(Animation.ZORDER_BOTTOM);
+                    break;
+                case ZORDER_NORMAL:
+                    rotate.setRepeatMode(Animation.ZORDER_NORMAL);
+                    break;
+                case ZORDER_TOP:
+                    rotate.setRepeatMode(Animation.ZORDER_TOP);
+                    break;
 
-                default: break;
+                default:
+                    break;
             }
 
             view.startAnimation(rotate);
@@ -114,11 +135,11 @@ public class Rotate {
         }
 
         public Rotate build() {
-            return new Rotate( this );
+            return new Rotate(this);
         }
     }
 
-    private Rotate( Builder builder ) {
+    private Rotate(Builder builder) {
         context = builder.context;
         rotate = builder.rotate;
 

@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnRotate;
-
+    private Button btnTranslateHorizontal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +28,20 @@ public class MainActivity extends AppCompatActivity {
                         .animView(findViewById(R.id.btn_rotate));
             }
         });
+
+        btnTranslateHorizontal = (Button) findViewById(R.id.btn_translate_horizontal);
+        btnTranslateHorizontal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Translate
+                        .Builder(getApplicationContext())
+                        .XYDelta(-10, 10, 0, 0)
+                        .duration(10)
+                        .repeatCount(5)
+                        .repeatMode(Translate.TYPE.REVERSE)
+                        .animView(findViewById(R.id.btn_translate_horizontal));
+            }
+        });
+
     }
 }

@@ -16,11 +16,20 @@ public class Rotate {
     private final float pivotX;
     private final float pivotY;
     private final int repeatCount;
-    private final String repeatMode;
+    private final TYPE repeatMode;
     private final int toDegrees;
 
     public static enum TYPE {
-        REVERSE
+        ABSOLUTE,
+        INFINITE,
+        RELATIVE_TO_PARENT,
+        RELATIVE_TO_SELF,
+        RESTART,
+        REVERSE,
+        START_ON_FIRST_FRAME,
+        ZORDER_BOTTOM,
+        ZORDER_NORMAL,
+        ZORDER_TOP
     }
 
     public static class Builder {
@@ -35,27 +44,33 @@ public class Rotate {
         private float pivotX = 0;
         private float pivotY = 0;
 
-        private int repeatCount = 5;
-        private TYPE repeatMode = TYPE.REVERSE;
+        private int repeatCount = 0;
+        private TYPE repeatMode = TYPE.ABSOLUTE;
 
         private int fromDegrees = -5;
         private int toDegrees = 5;
 
         public Builder(Context context) {
             this.context = context;
-
         }
 
         public <T extends View> void animView(T view) {
-
-            //rotate = AnimationUtils.loadAnimation(context, R.anim.rotate);
             rotate = new RotateAnimation(fromDegrees, toDegrees, pivotX, pivotY);
             rotate.setDuration(duration);
             rotate.setRepeatCount(repeatCount);
             switch (repeatMode) {
-                case REVERSE:
-                    rotate.setRepeatMode(Animation.REVERSE);
-                    break;
+                case ABSOLUTE: rotate.setRepeatMode(Animation.ABSOLUTE); break;
+                case INFINITE: rotate.setRepeatCount(Animation.INFINITE); break;
+                case RELATIVE_TO_PARENT: rotate.setRepeatMode(Animation.RELATIVE_TO_PARENT); break;
+                case RELATIVE_TO_SELF: rotate.setRepeatMode(Animation.RELATIVE_TO_SELF); break;
+                case RESTART: rotate.setRepeatMode(Animation.RESTART); break;
+                case REVERSE: rotate.setRepeatMode(Animation.REVERSE); break;
+                case START_ON_FIRST_FRAME: rotate.setRepeatMode(Animation.START_ON_FIRST_FRAME); break;
+                case ZORDER_BOTTOM: rotate.setRepeatMode(Animation.ZORDER_BOTTOM); break;
+                case ZORDER_NORMAL: rotate.setRepeatMode(Animation.ZORDER_NORMAL); break;
+                case ZORDER_TOP: rotate.setRepeatMode(Animation.ZORDER_TOP); break;
+
+                default: break;
             }
 
             view.startAnimation(rotate);
